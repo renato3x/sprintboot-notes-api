@@ -1,0 +1,21 @@
+services:
+  server:
+    build: .
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
+    networks:
+      - app
+    restart: on-failure
+  database:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: notes
+    networks:
+      - app
+    ports:
+      - 3306:3306
+networks:
+  app:
